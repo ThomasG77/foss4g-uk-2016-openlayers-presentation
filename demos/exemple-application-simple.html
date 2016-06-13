@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Exemple simple</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.13.1/ol.css" type="text/css" />
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <div id="information"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.15.1/ol.js"></script>
+    <script>
+    // To register https://www.bingmapsportal.com/
+    var bingMapsAerial = new ol.layer.Tile({
+      preload: Infinity,
+      source: new ol.source.BingMaps({
+        key: 'AkS9Vgm73GlUNW-mfn3_6U06hEUZLy69zgsh0stupt79_djPEMISIqV4WDrX7-yz',
+        imagerySet: 'Aerial'
+      })
+    });
+
+    bingMapsAerial.set('name', 'Bings Maps Aerial');
+
+    var bingMapsRoad = new ol.layer.Tile({
+      preload: Infinity,
+      source: new ol.source.BingMaps({
+        key: 'AkS9Vgm73GlUNW-mfn3_6U06hEUZLy69zgsh0stupt79_djPEMISIqV4WDrX7-yz',
+        imagerySet: 'Road',
+        culture: 'fr-FR'
+      })
+    });
+
+    bingMapsRoad.set('name', 'Bings Maps Road');
+
+    var mapQuestAerial = new ol.layer.Tile({
+      source: new ol.source.MapQuest({layer: 'sat'})
+    });
+
+    mapQuestAerial.set('name', 'MapQuest Open Aerial');
+
+    var simpleWMS = new ol.layer.Image({
+        opacity: 0.6,
+        source: new ol.source.ImageWMS({
+        url: 'http://services.vuduciel.loire-atlantique.fr/geoserver/ows',
+        params: {
+          'LAYERS': 'ORTHO44:jp2',
+          'TRANSPARENT': true,
+          'FORMAT': 'image/png'
+        }
+      })
+    });
+    simpleWMS.set('name', 'Orthophoto 44');
+
+    var layers = [mapQuestAerial, bingMapsAerial, bingMapsRoad, simpleWMS];
+
+    var view = new ol.View({
+      center: ol.proj.transform([-1.557998, 47.237287], 'EPSG:4326', 'EPSG:3857'),
+      zoom: 11
+    })
+
+    var map = new ol.Map({
+      layers: layers,
+      target: 'map',
+      view: view
+    });
+
+    //Generate checkbox from layers array
+    function generate_checkbox(id_checkbox, label_name, html_element) {
+      var checkbox = document.createElement('input');
+      checkbox.type = "checkbox";
+      checkbox.id = id_checkbox;
+
+      var label = document.createElement('label');
+      label.htmlFor = id_checkbox;
+      label.appendChild(document.createTextNode(label_name));
+      html_element.appendChild(checkbox);
+      html_element.appendChild(label);
+    }
+
+    // Loop from the end to get the top layer in first
+    for (var i = layers.length - 1; i >= 0; i--) {
+      (function () {
+        var layer = layers[i];
+        var id = layer.get('id');
+        var name = layer.get('name');
+        generate_checkbox('layer_id_' + i, name, document.body);
+        var checkbox = document.getElementById('layer_id_' + i);
+        checkbox.addEventListener('change', function() {
+          var checked = this.checked;
+          if (checked !== layer.getVisible()) {
+            layer.setVisible(checked);
+          }
+        });
+        layer.on('change:visible', function() {
+          var visible = this.getVisible();
+          if (visible !== checkbox.checked) {
+            checkbox.checked = visible;
+          }
+        });
+        checkbox.checked = layer.getVisible();
+      })();
+    }
+
+    var stylefn = function(feature, resolution) {
+      if (feature.get('NOM') == 'Centre Ville') {
+        return new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 127, 0.6)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#119FD3',
+            width: 1
+          }),
+          text: new ol.style.Text({
+           font: '12px Calibri,sans-serif',
+           text: feature.get('NOM'),
+         })
+        });
+      } else {
+        return new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(128, 0, 20, 0.4)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#11113',
+            width: 1
+          })
+        });
+      }
+    };
+
+    // Quartiers de la ville de Rennes
+    // http://www.data.rennes-metropole.fr/les-donnees/catalogue/?tx_icsopendatastore_pi1%5Bpage%5D=4&tx_icsopendatastore_pi1%5Buid%5D=22
+    var vector = new ol.layer.Vector({
+      source: new ol.source.Vector({
+        url: 'quartiers_nantes.geojson',
+        format: new ol.format.GeoJSON()
+      }),
+      style: stylefn
+    });
+
+    map.addLayer(vector);
+
+    var displayFeatureInfo = function(pixel) {
+      var features = [];
+      map.forEachFeatureAtPixel(pixel, function(feature, layer) {
+        features.push(feature);
+      });
+      var container = document.getElementById('information');
+      if (features.length > 0) {
+        var info = [];
+        for (var i = 0, ii = features.length; i < ii; ++i) {
+          info.push(features[i].get('NOM'));
+        }
+        container.innerHTML = info.join(', ') || '(unknown)';
+      } else {
+        container.innerHTML = '&nbsp;';
+      }
+    };
+
+    map.on('click', function(evt) {
+      var pixel = evt.pixel;
+      displayFeatureInfo(pixel);
+    });
+
+    </script>
+  </body>
+</html>
