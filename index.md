@@ -9,7 +9,7 @@ par [@ThomasG77](https://twitter.com/ThomasG77),
 
 # Who I Am?
 
-Freelance GIS Expert, doing also OpenData and data vizualisation, based in France<br>
+Freelance GIS Expert, doing also OpenData and data visualisation, based in France<br>
 My activities are consultancy, training and on-demand development.
 
 I wrote a book on [OpenLayers 3](https://www.packtpub.com/web-development/openlayers-3-beginner%E2%80%99s-guide)
@@ -22,9 +22,9 @@ I mainly develop with JavaScript and Python.
 
 
 OpenLayers 3 is a JavaScript library for online mapping, release under [BSD
-2-Clause](https://tldrlegal.com/license/bsd-2-clause-license-(freebsd)) license.
+2-Clause](https://tldrlegal.com/license/bsd-2-clause-license-(freebsd) license.
 
-It philosophy could be describe as follow:
+Its philosophy could be describe as follow:
 
 > *Maintain a core with extended functionalities with the choice to remove unused library parts depending of your application code.* <br>
 
@@ -50,7 +50,7 @@ If you need a lot of advanced functions without the third party plugins code qua
 
 If you are not sure about the requirements you will have, you may prefer OpenLayers to limit the risk to switch later.
 
-No opposition between both Openlayers and Leaflet libraries: this vision is shared by companies or web mapping agencies that nowadays support both OpenLayers 3 and Leaflet clients.
+No opposition between both OpenLayers and Leaflet libraries: this vision is shared by companies or web mapping agencies that nowadays support both OpenLayers 3 and Leaflet clients.
 
 ---
 
@@ -74,7 +74,7 @@ No opposition between both Openlayers and Leaflet libraries: this vision is shar
 
 ----
 
-## Different data sources - OpenStreetMap tiles based sources
+## Different data sources - OpenStreetMap tile based sources
 
 <a href="http://openlayers.org/en/master/examples/stamen.html"><img src="images/demo-stamen-openstreetmap-based-tiles-layer.png" width="800px"></a>
 
@@ -86,13 +86,13 @@ No opposition between both Openlayers and Leaflet libraries: this vision is shar
 
 ----
 
-## Different data sources - MapBox Vector Tiles
+## Different data sources - Mapbox Vector Tiles
 
 <a href="http://stvno.github.io/page/cbsexplorerol/index.html"><img src="images/demo-mapbox-vector-tiles-thematic-analysis.png"></a>
 
 ----
 
-## Client side reprojection
+## Client-side reprojection
 
 <a href="http://openlayers.org/en/master/examples/reprojection-by-code.html"><img src="images/epsg-io-client-reprojection-demo.gif" alt="" height="550"></a>
 
@@ -116,7 +116,7 @@ See also the [Zoomify demo](http://openlayers.org/en/master/examples/zoomify.htm
 
 ----
 
-## Styling - client side
+## Styling - client-side
 
 <a href="http://openlayers.org/en/master/examples/mapbox-vector-tiles-advanced.html"><img src="images/demo-styling-vector-tiles.png"></a>
 
@@ -162,17 +162,17 @@ Although interactions can concern zooming, panning, keyboard manipulation and mo
 
 ## Querying: the options
 
-* The client-side vector way
+* Client-side vector
 
-* The server vector side with WFS
+* Server-side vector with WFS
 
-* The WMS way with getGetFeatureInfo
+* WMS with GetFeatureInfo
 
-* The UTF-Grid way
+* UTF-Grid
 
 ----
 
-## Client-side vector query
+## Client-side vector
 
 <a href="http://wilson.boundlessps.com:8080/BoulderCountyFloods2013/"><img src="images/demo-foreachfeatureatpixel-querying.png" alt="" height="450px"></a>
 
@@ -180,7 +180,7 @@ It uses `forEachFeatureAtPixel` (from `ol.Map`). See [associated demo](http://op
 
 ----
 
-## Server vector side with WFS
+## Server-side vector with WFS
 
 <a href="http://openlayers.org/en/master/examples/vector-wfs-getfeature.html"><img src="images/demo-wfs-getfeature-filtering.png" alt="" height="450px"></a>
 
@@ -188,7 +188,7 @@ You pass filter encoding string in the GET or POST URL
 
 ----
 
-## WMS GetFeatureInfo
+## WMS with GetFeatureInfo
 
 <a href="http://mapstore2.geo-solutions.it/mapstore/#/viewer/openlayers/0?_k=wzmazu"><img src="images/demo-wms-getfeatureinfo.png
 " alt="" height="400"></a>
@@ -267,7 +267,7 @@ You will need an Overlay (`ol.Overlay`). It position changes depending of geogra
 
 There are various ways to create plugins at the moment.
 
-We maintain a repository to look for the overall ecosystem called [awesome-openlayers](https://github.com/webgeodatavore/awesome-openlayers/)
+We maintain a repository covering the ecosystem called [awesome-openlayers](https://github.com/webgeodatavore/awesome-openlayers/)
 
 *Protips:*
 
@@ -292,7 +292,7 @@ More or less intrusive frameworks. Choices depend of skills and team/developers 
 
 ## The "no-code approach" with Desktop GIS to OpenLayers 3
 
-* [QGIS2Web](https://github.com/tomchadwin/qgis2web) Export from QGIS to various web maaping library including OpenLayers (a Desktop GIS software)
+* [qgis2web](https://github.com/tomchadwin/qgis2web) Export from QGIS to various web mapping library including OpenLayers (a Desktop GIS software)
 * [Web App Builder](http://boundlessgeo.com/2015/06/building-openlayers-3-web-app-without-writing-code/)
 
 ----
@@ -315,7 +315,7 @@ One of the most impressive is [OL3-ext](http://viglino.github.io/ol3-ext/) for i
 * [Examples](http://openlayers.org/en/master/examples/)
 * [API documentation](http://openlayers.org/en/master/apidoc/)
 * [Workshop](http://openlayers.org/workshop/)
-* [graphic builder](https://github.com/openlayers/builder)
+* [Custom builds](https://github.com/openlayers/builder)
 
 ----
 
